@@ -27,6 +27,11 @@ public class VideoServiceImpl implements VideoService {
     @Override
     public Video saveVideo(VideoRequestDto dto) {
         Video video = new Video();
+        if (dto.getVideoUrl().contains(".be")) {
+            dto.setVideoUrl(dto.getVideoUrl().replace(".be", "be.com/embed"));
+        } else {
+            dto.setVideoUrl(dto.getVideoUrl().replace("watch?v=", "embed/"));
+        }
         BeanUtils.copyProperties(dto, video);
         videoRepository.save(video);
         return video;
@@ -44,7 +49,7 @@ public class VideoServiceImpl implements VideoService {
     @Override
     public Video findOneVideo(Long videoId) {
         Optional<Video> video = videoRepository.findById(videoId);
-        return video.get();
+        return video.orElse(null);
     }
 
     @Override
@@ -57,6 +62,21 @@ public class VideoServiceImpl implements VideoService {
         Optional<Video> v = videoRepository.findById(videoId);
         Video video = v.get();
         Optional<React> find = video.getReact().stream().filter(f -> f.getUserId().equals(userId)).findAny();
+
+        // Set alternative value for like and dislike.
+        if (dto.getIsLike() != null && dto.getIsDisLike() != null) {
+            if (dto.getIsLike() != dto.getIsDisLike()) {
+                dto.setIsLike(!dto.getIsDisLike());
+                dto.setIsDisLike(!dto.getIsLike());
+            }
+            if (dto.getIsLike() && dto.getIsDisLike()) {
+                dto.setIsLike(false);
+                dto.setIsDisLike(false);
+            }
+        }
+
+        // If user id found in react table just update react by user id.
+        // or create with video id and user id.
         if (find.isPresent()) {
             React react = reactRepository.findByUserId(userId);
             dto.setId(react.getId());

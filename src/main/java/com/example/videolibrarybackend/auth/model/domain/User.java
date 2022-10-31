@@ -1,5 +1,6 @@
-package com.example.videolibrarybackend.model.domain;
+package com.example.videolibrarybackend.auth.model.domain;
 
+import com.example.videolibrarybackend.model.domain.BaseEntity;
 import lombok.Data;
 
 import javax.persistence.Entity;
@@ -8,7 +9,7 @@ import javax.persistence.Table;
 @Entity
 @Data
 @Table(name = "USER_TABLE")
-public class User extends BaseEntity{
+public class User extends BaseEntity {
 
     private String userName;
 

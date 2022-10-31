@@ -1,6 +1,6 @@
-package com.example.videolibrarybackend.model.repositories;
+package com.example.videolibrarybackend.auth.model.repository;
 
-import com.example.videolibrarybackend.model.domain.User;
+import com.example.videolibrarybackend.auth.model.domain.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

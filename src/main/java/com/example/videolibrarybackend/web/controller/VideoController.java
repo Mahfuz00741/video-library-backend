@@ -7,7 +7,6 @@ import com.example.videolibrarybackend.web.dto.request.VideoRequestDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import javax.transaction.Transactional;
 import java.util.List;
 
 @CrossOrigin("*")
