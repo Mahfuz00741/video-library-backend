@@ -15,7 +15,6 @@ public class React extends BaseEntity{
 
     private Boolean isDisLike;
 
-    @Column(unique = true)
     private Long userId;
 
 }

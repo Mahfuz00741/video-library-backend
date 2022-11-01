@@ -19,6 +19,8 @@ public class Video extends BaseEntity{
 
     private Long totalView;
 
+    private Long uploaderId;
+
     @OneToMany(cascade = CascadeType.ALL)
     private List<React> react;
 

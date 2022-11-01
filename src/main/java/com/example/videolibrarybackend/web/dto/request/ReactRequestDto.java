@@ -12,4 +12,6 @@ public class ReactRequestDto extends BaseEntityDto {
 
     private Long userId;
 
+    private String reactType;
+
 }

@@ -15,6 +15,8 @@ public class VideoRequestDto extends BaseEntityDto {
 
     private Long totalView;
 
+    private Long uploaderId;
+
     private List<React> react;
 
 }

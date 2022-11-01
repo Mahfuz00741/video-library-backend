@@ -1,17 +1,19 @@
 package com.example.videolibrarybackend.web.controller;
 
+import com.example.videolibrarybackend.annotations.RestApiController;
 import com.example.videolibrarybackend.model.domain.Video;
 import com.example.videolibrarybackend.model.services.VideoService;
 import com.example.videolibrarybackend.web.dto.request.ReactRequestDto;
 import com.example.videolibrarybackend.web.dto.request.VideoRequestDto;
+import com.example.videolibrarybackend.web.dto.response.VideoResponseDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+
 import java.util.List;
 
-@CrossOrigin("*")
-@RestController
-@RequestMapping(path = "video/")
+@RestApiController
+@RequestMapping(path = "api/video/")
 public class VideoController {
 
     @Autowired
@@ -28,11 +30,11 @@ public class VideoController {
     }
 
     @GetMapping("find-one/{videoId}")
-    public Video findOne(@PathVariable Long videoId) {
+    public VideoResponseDto findOne(@PathVariable Long videoId) {
         return videoService.findOneVideo(videoId);
     }
 
-    @GetMapping("find-all")
+    @GetMapping("get-list")
     public List<Video> findAll() {
         return videoService.getVideoList();
     }
@@ -43,7 +45,7 @@ public class VideoController {
         videoService.reactVideoById(videoId, userId, dto);
     }
 
-    @PostMapping(path = "view-increase-by-video-id/{videoId}")
+    @GetMapping(path = "view-increase-by-video-id/{videoId}")
     public void videoViewIncrease(@PathVariable Long videoId) {
         videoService.videoViewIncrease(videoId);
     }

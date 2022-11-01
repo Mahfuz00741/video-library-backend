@@ -6,7 +6,7 @@ import lombok.Data;
 @Data
 public class UserResponseDto extends BaseEntityDto {
 
-    private String userName;
+    private String email;
 
     private String password;
 
