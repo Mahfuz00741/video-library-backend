@@ -97,21 +97,24 @@ public class VideoServiceImpl implements VideoService {
         Video video = v.get();
         Optional<React> find = video.getReact().stream().filter(f -> f.getUserId().equals(userId)).findAny();
 
-        // If user id found in react table just update react by user id.
-        // or create with video id and user id.
+        /** If user id found in react table just update react by user id or create with video id and user id */
         if (find.isPresent()) {
             React react = reactRepository.findByVideoIdAndUserId(videoId, userId);
             if (dto.getReactType().equals("like")) {
                 if (react.getIsLike() == null) {
                     react.setIsLike(true);
+                    react.setIsDisLike(false);
                 } else {
                     react.setIsLike(!react.getIsLike());
+                    react.setIsDisLike(null);
                 }
             } else {
                 if (react.getIsDisLike() == null) {
                     react.setIsDisLike(true);
+                    react.setIsLike(false);
                 } else {
                     react.setIsDisLike(!react.getIsDisLike());
+                    react.setIsLike(null);
                 }
             }
             reactRepository.save(react);
