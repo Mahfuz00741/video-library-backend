@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestApiController
-@RequestMapping(path = "auth/")
+@RequestMapping(path = "/")
 public class AuthController {
 
     @Autowired
@@ -24,10 +24,6 @@ public class AuthController {
         videoService.reactVideoById(videoId, userId, dto);
     }
 
-    @GetMapping(path = "/")
-    public String home() {
-        return "Welcome";
-    }
 
     @GetMapping(path = "video/get-list-by-uploader-id/{uploaderId}")
     public List<Video> getListByUploaderId(@PathVariable Long uploaderId) {

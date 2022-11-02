@@ -42,13 +42,13 @@ public class UserController {
     public AuthResponse getToken(@RequestBody AuthRequestDto dto) throws Exception{
         try {
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
-                    String.valueOf(dto.getUserName()), String.valueOf(dto.getPassword())
+                    String.valueOf(dto.getEmail()), String.valueOf(dto.getPassword())
             ));
         } catch (BadCredentialsException e) {
             throw  new Exception("error");
         }
 
-        final UserDetails userDetails = customUserDetailsService.loadUserByUsername(dto.getUserName());
+        final UserDetails userDetails = customUserDetailsService.loadUserByUsername(dto.getEmail());
 
         final String token = jwtUtility.generateToken(String.valueOf(userDetails));
 
