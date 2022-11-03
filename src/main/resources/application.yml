@@ -18,5 +18,3 @@ spring:
     init:
       platform: postgres
 
-jwt:
-  secret: secretkey123

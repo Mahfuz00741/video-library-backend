@@ -4,7 +4,7 @@ import com.example.videolibrarybackend.annotations.RestApiController;
 import com.example.videolibrarybackend.auth.model.domain.UserTable;
 import com.example.videolibrarybackend.auth.service.UserService;
 import com.example.videolibrarybackend.auth.service.implementation.CustomUserDetailsService;
-import com.example.videolibrarybackend.auth.utility.JwtUtility;
+import com.example.videolibrarybackend.auth.utility.JwtUtil;
 import com.example.videolibrarybackend.auth.web.dto.request.AuthRequestDto;
 import com.example.videolibrarybackend.auth.web.dto.response.AuthResponse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class UserController {
 
     @Autowired
-    private JwtUtility jwtUtility;
+    private JwtUtil jwtUtil;
 
     @Autowired
     private AuthenticationManager authenticationManager;
@@ -39,18 +39,18 @@ public class UserController {
 
 
     @PostMapping(path = "token")
-    public AuthResponse getToken(@RequestBody AuthRequestDto dto) throws Exception{
+    public AuthResponse generateToken(@RequestBody AuthRequestDto authRequest) throws Exception {
         try {
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
-                    String.valueOf(dto.getEmail()), String.valueOf(dto.getPassword())
+                    String.valueOf(authRequest.getEmail()), String.valueOf(authRequest.getPassword())
             ));
         } catch (BadCredentialsException e) {
             throw  new Exception("error");
         }
 
-        final UserDetails userDetails = customUserDetailsService.loadUserByUsername(dto.getEmail());
+        final UserDetails userDetails = customUserDetailsService.loadUserByUsername(authRequest.getEmail());
 
-        final String token = jwtUtility.generateToken(String.valueOf(userDetails));
+        final String token = jwtUtil.generateToken(String.valueOf(userDetails.getUsername()));
 
         return new AuthResponse(token);
     }

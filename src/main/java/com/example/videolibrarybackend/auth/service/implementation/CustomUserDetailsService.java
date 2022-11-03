@@ -1,5 +1,6 @@
 package com.example.videolibrarybackend.auth.service.implementation;
 
+
 import com.example.videolibrarybackend.auth.model.domain.UserTable;
 import com.example.videolibrarybackend.auth.model.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,17 +14,11 @@ import java.util.ArrayList;
 
 @Service
 public class CustomUserDetailsService implements UserDetailsService {
-
     @Autowired
-    private UserRepository userRepository;
+    private UserRepository repository;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-
-        UserTable userTable = userRepository.findByEmail(username);
-        // get user from database.
-
-
-        return new User(userTable.getEmail(), userTable.getPassword(), new ArrayList<>());
-    }
+        UserTable user = repository.findByEmail(username);
+        return new User(user.getEmail(), user.getPassword(),  new ArrayList<>());    }
 }

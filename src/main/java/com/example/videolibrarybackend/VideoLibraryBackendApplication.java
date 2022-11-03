@@ -13,9 +13,4 @@ public class VideoLibraryBackendApplication {
 		SpringApplication.run(VideoLibraryBackendApplication.class, args);
 	}
 
-	@Bean
-	PasswordEncoder passwordEncoder() {
-		return NoOpPasswordEncoder.getInstance();
-	}
-
 }
