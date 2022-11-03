@@ -12,9 +12,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 @RestApiController
 @RequestMapping(path = "api/user/")
@@ -35,6 +33,11 @@ public class UserController {
     @PostMapping(path = "create")
     public UserTable saveUser(@RequestBody AuthRequestDto dto) {
         return userService.saveUser(dto);
+    }
+
+    @GetMapping(path = "get-by-email/{email}")
+    public UserTable getByEmail(@PathVariable String email) {
+        return userService.getByEmail(email);
     }
 
 

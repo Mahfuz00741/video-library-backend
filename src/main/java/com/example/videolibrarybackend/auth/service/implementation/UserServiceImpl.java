@@ -21,10 +21,15 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserTable saveUser(AuthRequestDto dto) {
         UserTable user = new UserTable();
-        dto.setPassword(passwordEncoder.encode(dto.getPassword()));
+//        dto.setPassword(passwordEncoder.encode(dto.getPassword()));
         BeanUtils.copyProperties(dto, user);
         userRepository.save(user);
         return user;
+    }
+
+    @Override
+    public UserTable getByEmail(String email) {
+        return userRepository.findByEmail(email);
     }
 
 }

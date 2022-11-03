@@ -19,11 +19,6 @@ public class VideoController {
     @Autowired
     private VideoService videoService;
 
-    @PostMapping("save")
-    private Video saveVideo(@RequestBody VideoRequestDto videoRequestDto) {
-        return videoService.saveVideo(videoRequestDto);
-    }
-
     @PutMapping("update")
     private Video updateVideo(@RequestBody VideoRequestDto dto) {
         return videoService.updateVideo(dto);
@@ -44,14 +39,14 @@ public class VideoController {
         videoService.videoViewIncrease(videoId);
     }
 
-    @GetMapping(path = "get-list-by-uploader-id/{uploaderId}")
+   /* @GetMapping(path = "get-list-by-uploader-id/{uploaderId}")
     public List<Video> getListByUploaderId(@PathVariable Long uploaderId) {
         return videoService.getVideoListByUploaderId(uploaderId);
-    }
+    }*/
 
-    @PostMapping("react-by-video-and-user-id/{videoId}/{userId}")
+    /*@PostMapping("react-by-video-and-user-id/{videoId}/{userId}")
     public void reactVideoById(@PathVariable Long videoId, @PathVariable Long userId, @RequestBody ReactRequestDto dto) {
         videoService.reactVideoById(videoId, userId, dto);
-    }
+    }*/
 
 }

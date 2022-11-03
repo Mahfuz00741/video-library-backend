@@ -30,6 +30,11 @@ public class AuthController {
         return videoService.getVideoListByUploaderId(uploaderId);
     }
 
+    @PostMapping("video/save")
+    private Video saveVideo(@RequestBody VideoRequestDto videoRequestDto) {
+        return videoService.saveVideo(videoRequestDto);
+    }
+
 
 
 }

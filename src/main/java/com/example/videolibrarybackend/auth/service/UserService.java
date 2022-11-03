@@ -8,4 +8,6 @@ public interface UserService {
 
     UserTable saveUser(AuthRequestDto dto);
 
+    UserTable getByEmail(String email);
+
 }
